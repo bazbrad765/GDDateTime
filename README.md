@@ -52,7 +52,6 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
 
 ## Issues
 
-- Currently, all months have 30 days ( yes including feb ) - this will be addressed
 - Currently no timezones
 
 ## TODO
