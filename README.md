@@ -1,5 +1,7 @@
 # GDDateTime
 
+**- Inspired by the need for better DateTime handling in Godot**
+
 A small but smart DateTime management system for Godot 4.x that makes working with dates and times simple and intuitive. This utility script provides easy-to-use functions for date/time manipulation, timestamps, and time-based calculations.
 
 ## Features
@@ -8,11 +10,6 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
   - Add or subtract years, months, days, hours, minutes, and seconds
   - Handles month/year rollovers automatically
   - Supports negative time operations
-
-- **Timestamp Operations**  -- TO COME
-  - Convert DateTime to timestamps
-  - Create DateTime from timestamps
-  - Compare different dates easily
 
 - **Simple Integration**
   - Drop-in solution for Godot projects
@@ -25,7 +22,7 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
 2. Add it to your Godot project
 3. Use the classes from within
 
-## Usage -- 
+## Usage
 
 - Create a new time handler with `var timeutil = GDDateTime.new()`
 - Use your new handler to create a time object
@@ -63,11 +60,15 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
 - Add timezones
 - add correct days per month
 - add seasons
+- Timestamp Operations 
+  - Convert DateTime to timestamps
+  - Create DateTime from timestamps
+  - Compare different dates easily
   
 
 
 
-**- Inspired by the need for better DateTime handling in Godot**
+
 
 
 ## Support
