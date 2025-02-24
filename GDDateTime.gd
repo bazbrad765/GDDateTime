@@ -55,7 +55,7 @@ class GTime:
 class GDateTime:
 	var year: int
 	var month: Time.Month
-	var day: Time.Weekday
+	var day: int
 	var hour: int
 	var minute: int
 	var second: int
@@ -124,7 +124,7 @@ class GDateTime:
 		minute -= mins
 		second -= seconds
 		
-	func set_datetime(years:int, months:Time.Month, days:Time.Weekday,hours:int,minutes:int, seconds:int):
+	func set_datetime(years:int, months:Time.Month, days:int,hours:int,minutes:int, seconds:int):
 		year = clampi(years,1,9999)
 		month = clampi(months,1,12)
 		day = clampi(days,1,23)
@@ -136,7 +136,7 @@ class GDateTime:
 class GDate:
 	var year: int
 	var month: Time.Month
-	var day: Time.Weekday
+	var day: int
 	var init_values: Dictionary
 	var timestamp: int
 	
@@ -177,7 +177,7 @@ class GDate:
 		day -= days
 
 
-	func set_date(years:int, months:Time.Month, days:Time.Weekday):
+	func set_date(years:int, months:Time.Month, days:int):
 		year = clampi(years,1,9999)
 		month = clampi(months,1,12)
 		day = clampi(days,1,23)
@@ -197,7 +197,7 @@ func create_new_time_now() -> GTime:
 	var second = int(x["second"])
 	return GTime.new(hour,minute,second)
 	
-func create_new_datetime(year: int = 1 ,month: Time.Month = 1, day: Time.Weekday = 1, hour: int = 0, minute: int = 0, second: int = 0) -> GDateTime:
+func create_new_datetime(year: int = 1 ,month: Time.Month = 1, day: int = 1, hour: int = 0, minute: int = 0, second: int = 0) -> GDateTime:
 	return GDateTime.new(year, month, day, hour, minute, second)
 	
 func create_new_datetime_now() -> GDateTime:
@@ -210,7 +210,7 @@ func create_new_datetime_now() -> GDateTime:
 	var second = int(x["second"])
 	return GDateTime.new(year,month,day,hour,minute,second)
 	
-func create_new_date(year: int = 1 ,month: Time.Month = 1, day: Time.Weekday = 1) -> GDate:
+func create_new_date(year: int = 1 ,month: Time.Month = 1, day: int = 1) -> GDate:
 	return GDate.new(year, month, day)
 	
 func create_new_date_now() -> GDate:
