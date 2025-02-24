@@ -63,7 +63,7 @@ class GDateTime:
 	var timestamp: int
 	
 	
-	func _init(y: int = 0, mo: Time.Month = 0, d: Time.Weekday = 0, h: int = 0, m: int = 0, s: int = 0):
+	func _init(y: int = 0, mo: Time.Month = 0, d: int = 0, h: int = 0, m: int = 0, s: int = 0):
 		year = clampi(y,1,9999)
 		month = clampi(mo,1,12)
 		day = clampi(d,1,23)
@@ -141,7 +141,7 @@ class GDate:
 	var timestamp: int
 	
 	
-	func _init(y: int = 0, mo: Time.Month = 0, d: Time.Weekday = 0):
+	func _init(y: int = 0, mo: Time.Month = 0, d: int = 0):
 		year = clampi(y,1,9999)
 		month = clampi(mo,1,12)
 		day = clampi(d,1,23)
