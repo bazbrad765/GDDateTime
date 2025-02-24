@@ -25,27 +25,32 @@ class GTime:
 		return "%02d:%02d:%02d" % [hour, minute, second]
 		
 	func add_time(hours:int,mins:int, seconds:int):
-		while second + seconds > 59:
-			minute + 1
-			seconds -= 60
-		while minute + mins > 59:
-			hours += 1
-			mins -= 60
-		hour += hours
-		minute += mins
 		second += seconds
+		while second >= 60:
+			minute + 1
+			second -= 60
+		minute += mins
+		while minute >= 60:
+			hours += 1
+			minute -= 60
+		hour + = hours
+		while hour >= 24:
+			hour -= 24
+
 		
-	func subtract_time(hours:int, mins:int, seconds:int):
-		while seconds > second:
+	func subtract_time(years:int, months:int, days:int, hours:int, mins:int, seconds:int):
+		second -= seconds
+   		while second < 0:
 			minute -= 1
 			second += 60
-		while mins > minute:
-			hour -= 1
+    		minute -= mins
+		while minute < 0:
+        		hour -= 1
 			minute += 60
-		hour -= hours
-		minute -= mins
-		second -= seconds
-		
+    		hour -= hours
+		while hour < 0:
+			hour += 24
+
 	func set_time(hours:int,minutes:int, seconds:int):
 		hour = clampi(hours, 0, 23)
 		minute = clampi(minutes, 0, 59)
