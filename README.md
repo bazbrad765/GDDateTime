@@ -1,6 +1,6 @@
 # GDDateTime
 
-A small but growing DateTime management system for Godot 4.x that makes working with dates and times simple and intuitive. This utility script provides easy-to-use functions for date/time manipulation, timestamps, and time-based calculations.
+A small but smart DateTime management system for Godot 4.x that makes working with dates and times simple and intuitive. This utility script provides easy-to-use functions for date/time manipulation, timestamps, and time-based calculations.
 
 ## Features
 
