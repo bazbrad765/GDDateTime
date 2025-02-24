@@ -79,50 +79,56 @@ class GDateTime:
 		return "%02d:%02d:%02d -- %02d:%02d:%02d" % [year,month,day,hour, minute, second]
 		
 	func add_time(years:int, months:int, days:int,hours:int,mins:int, seconds:int):
-		while second + seconds > 59:
+		second += seconds
+		while second >= 60:
 			minute + 1
 			seconds -= 60
-		while minute + mins > 59:
+		minute += mins
+		while minute >= 60:
 			hours += 1
-			mins -= 60
-		while hour + hours > 23:
+			minute -= 60
+		hour + = hours
+		while hour >= 24:
 			day += 1
 			hours -= 24
-		while day + days > 30:
-			month += 1
-			days -= 30
-		while month + months > 12:
-			year += 1
-			months -= 12
 		year += years
 		month += months
+		while month > 12:
+			year += 1
+			month -= 12
 		day += days
-		hour += hours
-		minute += mins
-		second += seconds
+		while day > get_days_in_month(month,year):
+			day -= get_days_in_month(month,year)
+			month += 1
+			if month > 12:
+				month = 1
+				year += 1
 		
 	func subtract_time(years:int, months:int, days:int, hours:int, mins:int, seconds:int):
-		while seconds > second:
+		second -= seconds
+   		while second < 0:
 			minute -= 1
 			second += 60
-		while mins > minute:
-			hour -= 1
+    		minute -= mins
+		while minute < 0:
+        		hour -= 1
 			minute += 60
-		while hours > hour:
+    		hour -= hours
+		while hour < 0:
 			day -= 1
 			hour += 24
-		while days > day:
-			month -= 1
-			day += 30
-		while months > month:
-			year -= 1
-			month += 12
 		year -= years
 		month -= months
+		while month < 1:
+			year -= 1
+			month += 12
 		day -= days
-		hour -= hours
-		minute -= mins
-		second -= seconds
+		while day < 1:
+        		month -= 1
+			if month < 1:
+				month = 12
+            			year -= 1
+        		day += get_days_in_month(month, year)
 		
 	func set_datetime(years:int, months:Time.Month, days:int,hours:int,minutes:int, seconds:int):
 		year = clampi(years,1,9999)
