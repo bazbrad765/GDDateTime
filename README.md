@@ -8,7 +8,7 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
 
 - **Easy Time Manipulation**
   - Add or subtract years, months, days, hours, minutes, and seconds
-  - Handles month/year rollovers automatically
+  - Handles second/min/hour/day/month/year rollovers automatically
   - Supports negative time operations
 
 - **Simple Integration**
