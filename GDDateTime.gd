@@ -66,7 +66,7 @@ class GDateTime:
 	func _init(y: int = 0, mo: Time.Month = 0, d: int = 0, h: int = 0, m: int = 0, s: int = 0):
 		year = clampi(y,1,9999)
 		month = clampi(mo,1,12)
-		day = clampi(d,1,23)
+		day = clampi(d,1,get_days_in_month(month,year))
 		hour = clampi(h, 0, 23)
 		minute = clampi(m, 0, 59)
 		second = clampi(s, 0, 59)
@@ -144,7 +144,7 @@ class GDate:
 	func _init(y: int = 0, mo: Time.Month = 0, d: int = 0):
 		year = clampi(y,1,9999)
 		month = clampi(mo,1,12)
-		day = clampi(d,1,23)
+		day = clampi(d,1,get_days_in_month(month,year))
 		init_values = {"year":year,"month":month,"day":day,"hour":0,"minute":0,"second":0}
 		timestamp = Time.get_unix_time_from_datetime_dict(init_values) # will return the date @ 12am
 		var ts = {"timestamp":timestamp}
@@ -224,4 +224,16 @@ func convert_minutes_to_hours(minutes: int) -> Dictionary:
 	var hours: int = minutes / 60
 	var remaining_minutes: int = minutes % 60
 	return {"hours": hours, "minutes": remaining_minutes}
+
+func get_days_in_month(month: int, year: int) -> int:    
+    if month in [1, 3, 5, 7, 8, 10, 12]:
+        return 31
+    elif month == 2:
+        # Leap year check
+        if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+            return 29
+        else:
+            return 28
+    else:
+        return 30
 	
