@@ -165,27 +165,28 @@ class GDate:
 		return "%02d:%02d:%02d" % [year,month,day]
 		
 	func add_time(years:int, months:int, days:int):
-		while day + days > 30:
-			month += 1
-			days -= 30
-		while month + months > 12:
+		while month > 12:
 			year += 1
-			months -= 12
-		year += years
-		month += months
+			month -= 12
 		day += days
+		while day > get_days_in_month(month,year):
+			day -= get_days_in_month(month,year)
+			month += 1
+			if month > 12:
+				month = 1
+				year += 1
 		
-	func subtract_time(years:int, months:int, days:int):
-		while days > day:
-			month -= 1
-			day += 30
-		while months > month:
+	func subtract_time(years:int, months:int, days:int, hours:int, mins:int, seconds:int):
+		while month < 1:
 			year -= 1
 			month += 12
-			
-		year -= years
-		month -= months
 		day -= days
+		while day < 1:
+        		month -= 1
+			if month < 1:
+				month = 12
+            			year -= 1
+        		day += get_days_in_month(month, year)
 
 
 	func set_date(years:int, months:Time.Month, days:int):
