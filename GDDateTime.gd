@@ -133,7 +133,7 @@ class GDateTime:
 	func set_datetime(years:int, months:Time.Month, days:int,hours:int,minutes:int, seconds:int):
 		year = clampi(years,1,9999)
 		month = clampi(months,1,12)
-		day = clampi(days,1,23)
+		day = clampi(d,1,get_days_in_month(month,year))
 		hour = clampi(hours, 0, 23)
 		minute = clampi(minutes, 0, 59)
 		second = clampi(seconds, 0, 59)
@@ -186,7 +186,7 @@ class GDate:
 	func set_date(years:int, months:Time.Month, days:int):
 		year = clampi(years,1,9999)
 		month = clampi(months,1,12)
-		day = clampi(days,1,23)
+		day = clampi(d,1,get_days_in_month(month,year))
 
 
 
