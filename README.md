@@ -10,11 +10,13 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
   - Add or subtract years, months, days, hours, minutes, and seconds
   - Handles second/min/hour/day/month/year rollovers automatically
   - Supports negative time operations
+  - Knows leap years ( including 29 day feb )
 
 - **Simple Integration**
   - Drop-in solution for Godot projects
   - Clean, GDScript-native implementation
   - No external dependencies
+
 
 ## Installation
 
