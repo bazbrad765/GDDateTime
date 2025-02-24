@@ -82,7 +82,7 @@ class GDateTime:
 		second += seconds
 		while second >= 60:
 			minute + 1
-			seconds -= 60
+			second -= 60
 		minute += mins
 		while minute >= 60:
 			hours += 1
@@ -90,7 +90,7 @@ class GDateTime:
 		hour + = hours
 		while hour >= 24:
 			day += 1
-			hours -= 24
+			hour -= 24
 		year += years
 		month += months
 		while month > 12:
