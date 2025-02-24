@@ -90,7 +90,7 @@ class GDateTime:
 			second -= 60
 		minute += mins
 		while minute >= 60:
-			hours += 1
+			hour += 1
 			minute -= 60
 		hour += hours
 		while hour >= 24:
@@ -165,6 +165,8 @@ class GDate:
 		return "%02d:%02d:%02d" % [year,month,day]
 		
 	func add_time(years:int, months:int, days:int):
+		year += years
+		month += months
 		while month > 12:
 			year += 1
 			month -= 12
