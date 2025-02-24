@@ -153,7 +153,7 @@ class GDate:
 	func return_to_string() -> String:
 		return "%02d:%02d:%02d" % [year,month,day]
 		
-	func add_time(years:int, months:int, days:int,hours:int,mins:int, seconds:int):
+	func add_time(years:int, months:int, days:int):
 		while day + days > 30:
 			month += 1
 			days -= 30
