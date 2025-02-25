@@ -40,14 +40,14 @@ class GTime:
 		
 	func subtract_time(hours:int, mins:int, seconds:int):
 		second -= seconds
-   		while second < 0:
+		while second < 0:
 			minute -= 1
 			second += 60
-    		minute -= mins
+			minute -= mins
 		while minute < 0:
-        		hour -= 1
+			hour -= 1
 			minute += 60
-    		hour -= hours
+			hour -= hours
 		while hour < 0:
 			hour += 24
 
@@ -66,6 +66,18 @@ class GDateTime:
 	var second: int
 	var init_values: Dictionary
 	var timestamp: int
+	
+	func get_days_in_month(month: int, year: int) -> int:    
+		if month in [1, 3, 5, 7, 8, 10, 12]:
+			return 31
+		elif month == 2:
+			# Leap year check
+			if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+				return 29
+			else:
+				return 28
+		else:
+			return 30
 	
 	
 	func _init(y: int = 0, mo: int = 0, d: int = 0, h: int = 0, m: int = 0, s: int = 0):
@@ -111,14 +123,14 @@ class GDateTime:
 		
 	func subtract_time(years:int, months:int, days:int, hours:int, mins:int, seconds:int):
 		second -= seconds
-   		while second < 0:
+		while second < 0:
 			minute -= 1
 			second += 60
-    		minute -= mins
+			minute -= mins
 		while minute < 0:
-        		hour -= 1
+			hour -= 1
 			minute += 60
-    		hour -= hours
+			hour -= hours
 		while hour < 0:
 			day -= 1
 			hour += 24
@@ -129,11 +141,11 @@ class GDateTime:
 			month += 12
 		day -= days
 		while day < 1:
-        		month -= 1
+			month -= 1
 			if month < 1:
 				month = 12
-            			year -= 1
-        		day += get_days_in_month(month, year)
+				year -= 1
+				day += get_days_in_month(month, year)
 		
 	func set_datetime(years:int, months:int, days:int,hours:int,minutes:int, seconds:int):
 		year = clampi(years,1,9999)
@@ -150,6 +162,18 @@ class GDate:
 	var day: int
 	var init_values: Dictionary
 	var timestamp: int
+	
+	func get_days_in_month(month: int, year: int) -> int:    
+		if month in [1, 3, 5, 7, 8, 10, 12]:
+			return 31
+		elif month == 2:
+			# Leap year check
+			if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+				return 29
+			else:
+				return 28
+		else:
+			return 30
 	
 	
 	func _init(y: int = 0, mo: int = 0, d: int = 0):
@@ -184,11 +208,11 @@ class GDate:
 			month += 12
 		day -= days
 		while day < 1:
-        		month -= 1
+			month -= 1
 			if month < 1:
 				month = 12
-            			year -= 1
-        		day += get_days_in_month(month, year)
+				year -= 1
+				day += get_days_in_month(month, year)
 
 
 	func set_date(years:int, months:int, days:int):
@@ -240,14 +264,14 @@ func convert_minutes_to_hours(minutes: int) -> Dictionary:
 	return {"hours": hours, "minutes": remaining_minutes}
 
 func get_days_in_month(month: int, year: int) -> int:    
-    if month in [1, 3, 5, 7, 8, 10, 12]:
-        return 31
-    elif month == 2:
-        # Leap year check
-        if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-            return 29
-        else:
-            return 28
-    else:
-        return 30
+	if month in [1, 3, 5, 7, 8, 10, 12]:
+		return 31
+	elif month == 2:
+		# Leap year check
+		if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+			return 29
+		else:
+			return 28
+	else:
+		return 30
 	
