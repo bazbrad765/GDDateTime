@@ -101,6 +101,12 @@ class GDateTime:
 		timestamp = Time.get_unix_time_from_datetime_dict(init_values)
 		var ts = {"timestamp":timestamp}
 		init_values.merge(ts) 
+		
+	func is_leapyear(year = year) -> bool:
+		if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+			return true
+		else:
+			return false
 	
 	func get_minute_of_day(hour = hour, minute = minute):
 		return (hour * 60) + minute
@@ -229,8 +235,14 @@ class GDate:
 		timestamp = Time.get_unix_time_from_datetime_dict(init_values) # will return the date @ 12am
 		var ts = {"timestamp":timestamp}
 		init_values.merge(ts)
+		
+	func is_leapyear(year = year) -> bool:
+		if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+			return true
+		else:
+			return false
 	
-	func get_day_of_year(day = day,month = month, year = year):
+	func get_day_of_year(day = day,month = month, year = year) -> int:
 		var x = 0
 		if month == 1:
 			return day
