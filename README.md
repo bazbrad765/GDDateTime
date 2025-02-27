@@ -64,11 +64,7 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
   - Convert DateTime to timestamps
   - Create DateTime from timestamps
   - Compare different dates easily
-- Methods to get
-    - hours,mins,seconds into the day,week,month,year
-    - hours,mins,seconds until the day,week,month,year
-    - day of the year
-    - week of the year
+- Methods to :
 
 
 
