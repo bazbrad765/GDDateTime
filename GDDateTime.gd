@@ -3,6 +3,10 @@ extends Node
 # Time tracking class that provides similar functionality to Python's pendulum
 class_name GDDateTime
 
+const DAYS_BEEN_PER_MONTH = [31,59,90,120,151,181,212,243,273,304,334,365]
+const DAYS_BEEN_PER_MONTH_LEAP = [31,60,91,121,152,182,213,244,274,305,335,336]
+const DAYS_IN_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31]
+const DAYS_IN_MONTH_LEAP = [31,28,31,30,31,30,31,31,30,31,30,31]
 
 #Time Class to create new time
 class GTime:
@@ -20,7 +24,27 @@ class GTime:
 		timestamp = Time.get_unix_time_from_datetime_dict(init_values) #returns on day 1 of unix time 1975
 		var ts = {"timestamp":timestamp}
 		init_values.merge(ts) 
+		
+	func get_hours_until_next_day(hour = hour):
+		return 24 - hour
+		
+	func get_minutes_until_next_day(hour = hour, minute = minute):
+		var h = get_hours_until_next_day(hour) * 60
+		var m = (60-(minute)) 
+		return h + m
+		
+	func get_seconds_until_next_day(hour = hour, minute = minute, second = second):
+		var h = get_hours_until_next_day(hour) * 3600
+		var m = (60 - (minute)) * 60
+		var s = (60-second)
+		return h + m + s
+		
+	func get_minute_of_day(hour = hour, minute = minute):
+		return (hour * 60) + minute
 	
+	func get_second_of_day(hour = hour, minute = minute, second = second):
+		return (hour * 3600) + (minute * 60) + second
+		
 	func return_to_string() -> String:
 		return "%02d:%02d:%02d" % [hour, minute, second]
 		
@@ -37,7 +61,6 @@ class GTime:
 		while hour >= 24:
 			hour -= 24
 
-		
 	func subtract_time(hours:int, mins:int, seconds:int):
 		second -= seconds
 		while second < 0:
@@ -67,19 +90,6 @@ class GDateTime:
 	var init_values: Dictionary
 	var timestamp: int
 	
-	func get_days_in_month(month: int, year: int) -> int:    
-		if month in [1, 3, 5, 7, 8, 10, 12]:
-			return 31
-		elif month == 2:
-			# Leap year check
-			if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-				return 29
-			else:
-				return 28
-		else:
-			return 30
-	
-	
 	func _init(y: int = 0, mo: int = 0, d: int = 0, h: int = 0, m: int = 0, s: int = 0):
 		year = clampi(y,1,9999)
 		month = clampi(mo,1,12)
@@ -91,6 +101,53 @@ class GDateTime:
 		timestamp = Time.get_unix_time_from_datetime_dict(init_values)
 		var ts = {"timestamp":timestamp}
 		init_values.merge(ts) 
+	
+	func get_minute_of_day(hour = hour, minute = minute):
+		return (hour * 60) + minute
+	
+	func get_second_of_day(hour = hour, minute = minute, second = second):
+		return (hour * 3600) + (minute * 60) + second
+	
+	func get_hours_until_next_day(hour = hour):
+		return 24 - hour
+		
+	func get_minutes_until_next_day(hour = hour, minute = minute):
+		var h = get_hours_until_next_day(hour) * 60
+		var m = (60-(minute)) 
+		return h + m
+		
+	func get_seconds_until_next_day(hour = hour, minute = minute, second = second):
+		var h = get_hours_until_next_day(hour) * 3600
+		var m = (60 - (minute)) * 60
+		var s = (60-second)
+		return h + m + s
+	
+	func get_day_of_year(day = day,month = month, year = year):
+		var x = 0
+		if month == 1:
+			return day
+		elif (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+			for i in range(month - 1):
+				x += DAYS_IN_MONTH[i-1]
+			x += day
+			return x
+		else:
+			for i in range(month - 1):
+				x += DAYS_IN_MONTH[i-1]
+			x += day
+			return x
+	
+	func get_days_in_month(month: int, year: int) -> int:    
+		if month in [1, 3, 5, 7, 8, 10, 12]:
+			return 31
+		elif month == 2:
+			# Leap year check
+			if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+				return 29
+			else:
+				return 28
+		else:
+			return 30
 	
 	func return_to_string() -> String:
 		return "%02d:%02d:%02d -- %02d:%02d:%02d" % [year,month,day,hour, minute, second]
@@ -163,6 +220,39 @@ class GDate:
 	var init_values: Dictionary
 	var timestamp: int
 	
+	
+	func _init(y: int = 0, mo: int = 0, d: int = 0):
+		year = clampi(y,1,9999)
+		month = clampi(mo,1,12)
+		day = clampi(d,1,get_days_in_month(month,year))
+		init_values = {"year":year,"month":month,"day":day,"hour":0,"minute":0,"second":0}
+		timestamp = Time.get_unix_time_from_datetime_dict(init_values) # will return the date @ 12am
+		var ts = {"timestamp":timestamp}
+		init_values.merge(ts)
+	
+	func get_day_of_year(day = day,month = month, year = year):
+		var x = 0
+		if month == 1:
+			return day
+		elif (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+			for i in range(month - 1):
+				x += DAYS_IN_MONTH[i-1]
+			x += day
+			return x
+		else:
+			for i in range(month - 1):
+				x += DAYS_IN_MONTH[i-1]
+			x += day
+			return x
+
+	func get_days_until_next_year(day = day,month = month, year = year):
+		if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+			var x = 366 - get_day_of_year()
+			return x
+		else: 
+			var x = 365 - get_day_of_year()
+			return x
+
 	func get_days_in_month(month: int, year: int) -> int:    
 		if month in [1, 3, 5, 7, 8, 10, 12]:
 			return 31
@@ -174,16 +264,6 @@ class GDate:
 				return 28
 		else:
 			return 30
-	
-	
-	func _init(y: int = 0, mo: int = 0, d: int = 0):
-		year = clampi(y,1,9999)
-		month = clampi(mo,1,12)
-		day = clampi(d,1,get_days_in_month(month,year))
-		init_values = {"year":year,"month":month,"day":day,"hour":0,"minute":0,"second":0}
-		timestamp = Time.get_unix_time_from_datetime_dict(init_values) # will return the date @ 12am
-		var ts = {"timestamp":timestamp}
-		init_values.merge(ts) 
 	
 	func return_to_string() -> String:
 		return "%02d:%02d:%02d" % [year,month,day]
@@ -214,13 +294,10 @@ class GDate:
 				year -= 1
 				day += get_days_in_month(month, year)
 
-
 	func set_date(years:int, months:int, days:int):
 		year = clampi(years,1,9999)
 		month = clampi(months,1,12)
 		day = clampi(days,1,get_days_in_month(month,year))
-
-
 
 
 # Create a time object from input
@@ -263,15 +340,9 @@ func convert_minutes_to_hours(minutes: int) -> Dictionary:
 	var remaining_minutes: int = minutes % 60
 	return {"hours": hours, "minutes": remaining_minutes}
 
-func get_days_in_month(month: int, year: int) -> int:    
-	if month in [1, 3, 5, 7, 8, 10, 12]:
-		return 31
-	elif month == 2:
-		# Leap year check
-		if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-			return 29
-		else:
-			return 28
+func get_total_days_in_year(year: int):
+	if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+		return 366
 	else:
-		return 30
-	
+		return 365
+		
