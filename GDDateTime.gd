@@ -358,3 +358,28 @@ func get_total_days_in_year(year: int):
 	else:
 		return 365
 		
+	
+func get_time_between_unix(unix1: int, unix2:int) -> Dictionary:
+	var dif
+	var mins
+	var hours
+	var seconds
+	if unix1 > unix2:
+		dif = unix1 - unix2
+		mins = dif / 60
+		seconds = dif - (mins * 60)
+		hours = mins / 60
+		mins -= hours * 60
+	else:
+		dif = unix2 - unix1
+		mins = dif / 60
+		seconds = dif - (mins * 60)
+		hours = mins / 60
+		mins -= hours * 60
+	print("Total Seconds: " +str(dif))
+	print("Hours: " +str(hours))
+	print("Minutes: " +str(mins))
+	print("Seconds: " +str(seconds))
+	var ret_dict = {"Total Seconds": dif, "Hours": hours, "Minutes": mins, "Seconds": seconds}
+	return ret_dict
+		
