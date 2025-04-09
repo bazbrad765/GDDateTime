@@ -10,7 +10,7 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
   - Add or subtract years, months, days, hours, minutes, and seconds
   - Handles second/min/hour/day/month/year rollovers automatically
   - Supports negative time operations
-  - Knows leap years ( including 29 day feb )
+  - Knows leap years
 
 - **Simple Integration**
   - Drop-in solution for Godot projects
@@ -44,9 +44,7 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
 - `get_hours/minutes/seconds_until_next_day()` - returns int
 - `get_mintue/second_of_day()` - returns int
 - `is_leapyear()` - returns bool
-
-- 
-- 
+- `get_time_between_unix()` - return dict of TOTAL SECONDS, Hours, minutes, seconds
 
 ## Properties
 
