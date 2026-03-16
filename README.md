@@ -34,7 +34,7 @@ A small but smart DateTime management system for Godot 4.x that makes working wi
   -  `var d = timeutl.create_new_date_now()` - creates a new date object on date of creation ( this is pulled from the system the script is running on )
   -  `var dt = timeutil.create_new_datetime(1995,12,12,15,15,00)` - creates a new datetime object at date and time given in constructors ( this would be 1995:12:12 -- 15:15:00 )
   -  `var dt = timeutil.create_new_datetime_now()` - creates a new datetime object at date and time of creation ( this is pulled from the system the script is running on )
-  -  `var stopwatch = timeutil.new()` -  creates a new stopwatch object. Start it with `stopwatch.start()`, and get elapsed time with `stopwatch.get_seconds()`
+  -  `var stopwatch = timeutil.Stopwatch.new()` -  creates a new stopwatch object. Start it with `stopwatch.start()`, and get elapsed time with `stopwatch.get_seconds()`
 
 ## Methods
 
