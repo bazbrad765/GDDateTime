@@ -312,6 +312,28 @@ class GDate:
 		day = clampi(days,1,get_days_in_month(month,year))
 
 
+#Stopwatch
+class Stopwatch extends Node:
+	var elapsed: float = 0.0
+	var running: bool = false
+	
+	func start():
+		running = true
+	
+	func stop():
+		running = false
+	
+	func reset():
+		elapsed = 0.0
+	
+	func _process(delta):
+		if running:
+			elapsed += delta
+	
+	func get_seconds() -> int:
+		return int(elapsed)
+	
+
 # Create a time object from input
 func create_new_time(hour: int = 0, minute: int = 0, second: int = 0) -> GTime:
 	return GTime.new(hour, minute, second)
